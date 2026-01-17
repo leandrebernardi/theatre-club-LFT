@@ -14,20 +14,17 @@ document.addEventListener('keydown', function(event) {
         etape++;
 
         if (etape === 1) {
-            // ÉTAPE 1 : Faire arriver la machine sur l'image 1
+            // La machine glisse depuis la droite sur l'image 1
             machine.classList.add('machine-entree');
-            console.log("La machine arrive !");
         } 
         else if (etape === 2) {
-            // ÉTAPE 2 : On change le fond (image 2) et on peut faire repartir la machine
+            // L'image 1 devient l'image 2 ET la machine devient invisible
             decor.style.backgroundImage = "url('" + listeImages[1] + "')";
-            machine.classList.remove('machine-entree'); // Elle repart à droite
-            console.log("Image 2 affichée");
+            machine.classList.add('machine-cachee'); 
         } 
         else if (etape === 3) {
-            // ÉTAPE 3 : Image 3
+            // Passage à l'image 3
             decor.style.backgroundImage = "url('" + listeImages[2] + "')";
-            console.log("Image 3 affichée");
         }
     }
 });
