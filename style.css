@@ -19,8 +19,8 @@ body, html {
 
 .machine-style {
     position: fixed;
-    bottom: 5%; /* Position basse */
-    right: -500px; /* Cachée à droite au début */
+    bottom: 2%; /* Position basse */
+    right: -600px; /* Cachée à droite au début */
     width: 650px;
     height: auto;
     /* Mouvement saccadé (lourd) en 10 étapes sur 3 secondes */
@@ -30,7 +30,7 @@ body, html {
 
 /* Classe activée par le premier clic Espace */
 .machine-entree {
-    right: 25% !important; 
+    right: 15% !important; 
 }
 .vortex-style {
     position: fixed;
@@ -39,7 +39,7 @@ body, html {
     width: 500px; /* Taille à ajuster selon ton image */
     z-index: 10000; /* Devant la machine */
     opacity: 0; 
-    transition: opacity 1s ease-in-out;
+    transition: opacity 1.5s ease-in-out;
     pointer-events: none;
 }
 
