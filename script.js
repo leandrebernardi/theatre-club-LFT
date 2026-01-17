@@ -16,29 +16,48 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault();
         etape++;
 
+        // --- ALLER VERS VILLE ZOMBIE ---
         if (etape === 1) {
+            machine.style.display = "block"; // On s'assure qu'elle est visible
             machine.classList.add('machine-entree');
         } 
         else if (etape === 2) {
             vortex.classList.add('vortex-visible');
         } 
         else if (etape === 3) {
-            // Déclenche le flash de 3s
             flash.classList.add('flash-animation');
-            
-            // On change le décor quand le flash est au plus fort (0.3s)
             setTimeout(() => {
-                decor.style.backgroundImage = "url('" + listeImages[1] + "')";
+                decor.style.backgroundImage = "url('" + listeImages[1] + "')"; // Ville Zombie
+                machine.style.display = "none";
+                vortex.style.display = "none";
+                vortex.classList.remove('vortex-visible'); // Reset pour plus tard
+            }, 300);
+            setTimeout(() => flash.classList.remove('flash-animation'), 3000);
+        }
+
+        // --- RETOUR VERS LE CAFÉ ---
+        else if (etape === 4) {
+            // La machine réapparaît dans la ville zombie
+            machine.style.display = "block";
+            console.log("Machine de retour");
+        }
+        else if (etape === 5) {
+            // Le vortex se rallume
+            vortex.classList.add('vortex-visible');
+            console.log("Vortex de retour");
+        }
+        else if (etape === 6) {
+            // FLASH FINAL ET RETOUR AU CAFÉ
+            flash.classList.add('flash-animation');
+            setTimeout(() => {
+                decor.style.backgroundImage = "url('" + listeImages[0] + "')"; // Retour au Café
                 machine.style.display = "none";
                 vortex.style.display = "none";
             }, 300);
-
-            // On retire la classe après les 3s pour pouvoir recommencer
-            setTimeout(() => {
-                flash.classList.remove('flash-animation');
-            }, 3000);
+            setTimeout(() => flash.classList.remove('flash-animation'), 3000);
         }
-        else if (etape === 4) {
+        else if (etape === 7) {
+            // Image bonus (le 3)
             decor.style.backgroundImage = "url('" + listeImages[2] + "')";
         }
     }
