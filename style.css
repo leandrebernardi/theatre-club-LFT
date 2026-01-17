@@ -21,7 +21,7 @@ body, html {
 .machine-style {
     position: fixed;
     bottom: 5%; /* Position basse */
-    right: -100%; /* Cachée à droite au début */
+    right: -500px; /* Cachée à droite au début */
     width: 450px;
     height: auto;
     /* Mouvement saccadé (lourd) en 10 étapes sur 3 secondes */
