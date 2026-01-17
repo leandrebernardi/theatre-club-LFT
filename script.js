@@ -10,20 +10,25 @@ const listeImages = [
 let etape = 0; 
 
 document.addEventListener('keydown', function(event) {
-    if (event.key === " ") {
+    if (event.key === " " || event.code === "Space") {
+        event.preventDefault(); // Empêche la page de descendre
         etape++;
 
         if (etape === 1) {
-            // La machine arrive avec l'effet saccadé
+            // Fait entrer la machine
             machine.classList.add('machine-entree');
+            console.log("Etape 1 : La machine entre");
         } 
         else if (etape === 2) {
-            // L'image change ET on supprime la machine de l'écran
+            // Change le fond et supprime la machine
             decor.style.backgroundImage = "url('" + listeImages[1] + "')";
-            machine.style.display = "none"; // Disparition immédiate
+            machine.style.display = "none";
+            console.log("Etape 2 : Image 2 et machine supprimée");
         } 
         else if (etape === 3) {
+            // Image 3
             decor.style.backgroundImage = "url('" + listeImages[2] + "')";
+            console.log("Etape 3 : Image 3");
         }
     }
 });
