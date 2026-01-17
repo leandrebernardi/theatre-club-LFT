@@ -68,11 +68,12 @@ body, html {
 }
 
 .flash-animation {
-    animation: flash-effect 0.8s ease-out;
+    animation: flash-effect 3s ease-out;
 }
 
 @keyframes flash-effect {
     0% { opacity: 0; }
-    25% { opacity: 1; }
+    10% { opacity: 1; }
+    30% { opacity: 1; }
     100% { opacity: 0; }
 }
