@@ -20,6 +20,20 @@ body, html {
     /* On force l'image du café au démarrage ici */
     background-image: url('https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=');
 }
+
+.machine-style {
+    position: absolute;
+    top: 20%; /* Ajuste la hauteur selon tes envies */
+    right: -100%; /* Cache la machine complètement à droite */
+    width: 400px; /* Ajuste la taille de la machine */
+    transition: right 1s ease-out; /* C'est ce qui crée l'effet de glisse */
+    z-index: 10; /* Pour qu'elle passe DEVANT le décor */
+}
+
+/* Cette classe sera ajoutée par le JavaScript pour faire entrer la machine */
+.machine-entree {
+    right: 30%; /* La machine s'arrête vers le milieu/droite */
+}
     
     /* On insère ton lien d'image ici */
     background-image: url('https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=');
