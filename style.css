@@ -24,8 +24,8 @@ body, html {
     right: -100%; /* Cachée à droite au début */
     width: 450px;
     height: auto;
-    /* Mouvement saccadé (lourd) en 10 étapes sur 4 secondes */
-    transition: right 4s steps(10); 
+    /* Mouvement saccadé (lourd) en 10 étapes sur 3 secondes */
+    transition: right 3s steps(10); 
     z-index: 9999; /* Toujours devant le décor */
 }
 
