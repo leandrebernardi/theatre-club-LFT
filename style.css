@@ -23,16 +23,23 @@ body, html {
 
 .machine-style {
     position: absolute;
-    top: 20%; /* Ajuste la hauteur selon tes envies */
-    right: -100%; /* Cache la machine complètement à droite */
-    width: 400px; /* Ajuste la taille de la machine */
-    transition: right 1s ease-out; /* C'est ce qui crée l'effet de glisse */
-    z-index: 10; /* Pour qu'elle passe DEVANT le décor */
+    top: 20%;
+    right: -100%; /* Cachée au début */
+    width: 400px;
+    transition: right 1s ease-out, opacity 0.5s; /* Animation pour l'arrivée et la transparence */
+    z-index: 10;
+    opacity: 1; /* Visible par défaut quand elle a la classe entrée */
 }
 
-/* Cette classe sera ajoutée par le JavaScript pour faire entrer la machine */
 .machine-entree {
-    right: 30%; /* La machine s'arrête vers le milieu/droite */
+    right: 30%; /* Position où elle s'arrête */
+}
+
+/* On crée une classe pour la faire disparaître */
+.machine-cachee {
+    opacity: 0; 
+    pointer-events: none; /* Pour qu'elle ne gêne pas si on clique */
+
 }
     
     /* On insère ton lien d'image ici */
