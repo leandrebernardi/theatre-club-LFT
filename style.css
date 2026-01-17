@@ -14,20 +14,22 @@ body, html {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    /* Image de départ (Café) */
     background-image: url('https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=');
 }
 
 .machine-style {
-    position: absolute;
-    bottom: 5%; 
-    right: -100%; /* Cachée à droite */
+    position: fixed;
+    bottom: 5%; /* Position basse */
+    right: -100%; /* Cachée à droite au début */
     width: 450px;
     height: auto;
+    /* Mouvement saccadé (lourd) en 10 étapes sur 4 secondes */
     transition: right 4s steps(10); 
-    z-index: 100; /* Très haut pour être devant tout */
-    background-color: red; /* TEST: si l'image bug, on verra un bloc rouge */
+    z-index: 9999; /* Toujours devant le décor */
 }
 
+/* Classe activée par le premier clic Espace */
 .machine-entree {
     right: 25% !important; 
 }
