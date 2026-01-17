@@ -1,5 +1,6 @@
 const decor = document.getElementById('decor');
 const machine = document.getElementById('machine');
+const vortex = document.getElementById('vortex'); // Assure-toi d'avoir id="vortex" dans ton HTML
 
 const listeImages = [
     "https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=",
@@ -10,26 +11,27 @@ const listeImages = [
 let etape = 0; 
 
 document.addEventListener('keydown', function(event) {
-    // On écoute la touche Espace
     if (event.key === " " || event.code === "Space") {
-        event.preventDefault(); // Empêche la page de bouger
+        event.preventDefault(); 
         etape++;
 
         if (etape === 1) {
-            // ACTION 1 : Faire entrer la machine
+            // ÉTAPE 1 : La machine entre
             machine.classList.add('machine-entree');
-            console.log("Machine entre");
         } 
         else if (etape === 2) {
-            // ACTION 2 : Changer le fond ET faire disparaître la machine d'un coup
-            decor.style.backgroundImage = "url('" + listeImages[1] + "')";
-            machine.style.display = "none"; 
-            console.log("Fond 2 et machine supprimée");
+            // ÉTAPE 2 : Le vortex apparaît sur la machine
+            vortex.classList.add('vortex-visible');
         } 
         else if (etape === 3) {
-            // ACTION 3 : Changer vers le fond 3
+            // ÉTAPE 3 : La machine et le vortex disparaissent, le décor change
+            decor.style.backgroundImage = "url('" + listeImages[1] + "')";
+            machine.style.display = "none";
+            vortex.style.display = "none";
+        }
+        else if (etape === 4) {
+            // ÉTAPE 4 : Image suivante (le chiffre 3)
             decor.style.backgroundImage = "url('" + listeImages[2] + "')";
-            console.log("Fond 3");
         }
     }
 });
