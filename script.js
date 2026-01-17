@@ -17,31 +17,28 @@ document.addEventListener('keydown', function(event) {
         etape++;
 
         if (etape === 1) {
-            // 1. La machine arrive
             machine.classList.add('machine-entree');
         } 
         else if (etape === 2) {
-            // 2. Le vortex s'allume
             vortex.classList.add('vortex-visible');
         } 
         else if (etape === 3) {
-            // FLASH ET CHANGEMENT VERS VILLE ZOMBIE
+            // Déclenche le flash de 3s
             flash.classList.add('flash-animation');
-
+            
+            // On change le décor quand le flash est au plus fort (0.3s)
             setTimeout(() => {
                 decor.style.backgroundImage = "url('" + listeImages[1] + "')";
                 machine.style.display = "none";
                 vortex.style.display = "none";
-            }, 200); // On change le décor quand c'est bien blanc
+            }, 300);
 
-            // ON ATTEND 3000ms (3 secondes) avant de nettoyer la classe
+            // On retire la classe après les 3s pour pouvoir recommencer
             setTimeout(() => {
                 flash.classList.remove('flash-animation');
-            }, 3000); 
-        }
+            }, 3000);
         }
         else if (etape === 4) {
-            // 4. Scène finale (le 3)
             decor.style.backgroundImage = "url('" + listeImages[2] + "')";
         }
     }
