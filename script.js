@@ -25,18 +25,20 @@ document.addEventListener('keydown', function(event) {
             vortex.classList.add('vortex-visible');
         } 
         else if (etape === 3) {
-            // 3. FLASH + CHANGEMENT DE DÉCOR
+            // FLASH ET CHANGEMENT VERS VILLE ZOMBIE
             flash.classList.add('flash-animation');
-            
+
             setTimeout(() => {
                 decor.style.backgroundImage = "url('" + listeImages[1] + "')";
                 machine.style.display = "none";
                 vortex.style.display = "none";
-            }, 150);
+            }, 200); // On change le décor quand c'est bien blanc
 
+            // ON ATTEND 3000ms (3 secondes) avant de nettoyer la classe
             setTimeout(() => {
                 flash.classList.remove('flash-animation');
-            }, 800);
+            }, 3000); 
+        }
         }
         else if (etape === 4) {
             // 4. Scène finale (le 3)
