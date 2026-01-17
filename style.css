@@ -35,7 +35,7 @@ body, html {
 .vortex-style {
     position: fixed;
     bottom: 15%; /* Ajuste pour qu'il soit au centre de la machine */
-    right: 30%;  /* Même zone que la machine-entree */
+    right: 18%;  /* Même zone que la machine-entree */
     width: 600px; /* Taille à ajuster selon ton image */
     z-index: 10000; /* Devant la machine */
     opacity: 0; 
@@ -46,4 +46,14 @@ body, html {
 /* Classe pour faire apparaître le vortex */
 .vortex-visible {
     opacity: 1;
+}
+@keyframes rotation {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.vortex-visible {
+    opacity: 1 !important;
+    /* Ajoute cette ligne pour faire tourner le vortex */
+    animation: rotation 10s linear infinite; 
 }
