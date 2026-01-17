@@ -23,16 +23,22 @@ body, html {
 
 .machine-style {
     position: absolute;
-    top: 20%;
-    right: -100%; /* Cachée au début */
+    /* POSITION : Augmenter le % pour descendre l'image (80% est vers le bas) */
+    bottom: 10%; 
+    
+    /* VITESSE : On change 1s par 3s pour que ce soit 3 fois plus lent */
+    transition: right 3s ease-out, opacity 0.5s; 
+    
+    right: -100%; 
     width: 400px;
-    transition: right 1s ease-out, opacity 0.5s; /* Animation pour l'arrivée et la transparence */
     z-index: 10;
-    opacity: 1; /* Visible par défaut quand elle a la classe entrée */
+    opacity: 1;
 }
 
 .machine-entree {
-    right: 30%; /* Position où elle s'arrête */
+    /* La machine s'arrête ici (30% du bord droit) */
+    right: 30%; 
+}
 }
 
 /* On crée une classe pour la faire disparaître */
