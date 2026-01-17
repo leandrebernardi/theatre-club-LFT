@@ -1,29 +1,37 @@
-// On récupère l'élément du décor
+// 1. On cible l'élément HTML qui contient le décor
 const decor = document.getElementById('decor');
 
-// On crée la liste de tes images dans l'ordre
+// 2. Ta liste d'images (le café, puis les deux autres)
 const listeImages = [
-    "https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=", // Image 1 (Lunch Room)
-    "https://i.ytimg.com/vi/HQMrFOIGBls/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAgVgWAUtUFEAKCJpNPxd-Hqqf5AA", // Image 2(Rue)
-    "https://i.pinimg.com/736x/27/2d/56/272d56698720250225df2645eb5fafe2.jpg" // Image 3(Humain Camp)
+    "https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=",
+    "https://i.ytimg.com/vi/HQMrFOIGBls/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAgVgWAUtUFEAKCJpNPxd-Hqqf5AA",
+    "https://i.pinimg.com/736x/27/2d/56/272d56698720250225df2645eb5fafe2.jpg"
 ];
 
-let indexActuel = 0; // On commence à la première image
+// 3. On commence à 0 (l'image du café qui est déjà affichée via le CSS)
+let indexActuel = 0; 
 
-// On écoute la barre d'espace
+// 4. La fonction qui écoute ton clavier
 document.addEventListener('keydown', function(event) {
-    if (event.key === " ") {
-        // On passe à l'image suivante
+    
+    // On vérifie si la touche est bien la barre d'espace
+    if (event.key === " " || event.code === "Space") {
+        
+        // On augmente l'index pour passer à l'image suivante
         indexActuel = indexActuel + 1;
 
-        // Si on dépasse la dernière image, on peut revenir au début ou rester sur la dernière
+        // On vérifie qu'on n'a pas dépassé la fin de la liste
         if (indexActuel < listeImages.length) {
+            // On change l'image de fond
             decor.style.backgroundImage = "url('" + listeImages[indexActuel] + "')";
-            console.log("Décor suivant affiché !");
+            console.log("Changement vers l'image n°" + (indexActuel + 1));
         } else {
-            console.log("Fin des décors prévus.");
-            // Optionnel : décommente la ligne suivante pour revenir au début :
-            // indexActuel = 0; decor.style.backgroundImage = "url('" + listeImages[0] + "')";
+            // Si on est à la fin, on peut décider de revenir au début (facultatif)
+            console.log("Fin de la séquence de décors.");
+            
+            /* DECOMMENTE LES 2 LIGNES CI-DESSOUS POUR RECOMMENCER EN BOUCLE : */
+            // indexActuel = 0;
+            // decor.style.backgroundImage = "url('" + listeImages[0] + "')";
         }
     }
 });
