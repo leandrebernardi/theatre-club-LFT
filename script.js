@@ -14,16 +14,15 @@ document.addEventListener('keydown', function(event) {
         etape++;
 
         if (etape === 1) {
-            // La machine glisse depuis la droite sur l'image 1
+            // La machine arrive avec l'effet saccadé
             machine.classList.add('machine-entree');
         } 
         else if (etape === 2) {
-            // L'image 1 devient l'image 2 ET la machine devient invisible
+            // L'image change ET on supprime la machine de l'écran
             decor.style.backgroundImage = "url('" + listeImages[1] + "')";
-            machine.classList.add('machine-cachee'); 
+            machine.style.display = "none"; // Disparition immédiate
         } 
         else if (etape === 3) {
-            // Passage à l'image 3
             decor.style.backgroundImage = "url('" + listeImages[2] + "')";
         }
     }
