@@ -12,51 +12,49 @@ body, html {
     height: 100vh;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    /* Image de départ (Café) */
     background-image: url('https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=');
+    transition: background-image 0.2s; /* Rapide pour le flash */
 }
 
+/* LA MACHINE */
 .machine-style {
     position: fixed;
-    bottom: 2%; /* Position basse */
-    right: -600px; /* Cachée à droite au début */
+    bottom: 2%;
+    right: -650px; /* Cachée juste au bord */
     width: 650px;
     height: auto;
-    /* Mouvement saccadé (lourd) en 10 étapes sur 3 secondes */
     transition: right 3s steps(10); 
-    z-index: 9999; /* Toujours devant le décor */
+    z-index: 999;
 }
 
-/* Classe activée par le premier clic Espace */
 .machine-entree {
-    right: 15% !important; 
+    right: 15% !important;
 }
+
+/* LE VORTEX */
 .vortex-style {
     position: fixed;
-    bottom: 15%; /* Ajuste pour qu'il soit au centre de la machine */
-    right: 18%;  /* Même zone que la machine-entree */
-    width: 600px; /* Taille à ajuster selon ton image */
-    z-index: 10000; /* Devant la machine */
-    opacity: 0; 
-    transition: opacity 1.5s ease-in-out;
+    bottom: 10%;
+    right: 18%;
+    width: 600px;
+    height: auto;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
     pointer-events: none;
 }
 
-/* Classe pour faire apparaître le vortex */
 .vortex-visible {
-    opacity: 1;
+    opacity: 1 !important;
+    animation: rotation 8s linear infinite; /* Il tourne ! */
 }
+
 @keyframes rotation {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
-.vortex-visible {
-    opacity: 1 !important;
-    /* Ajoute cette ligne pour faire tourner le vortex */
-    animation: rotation 10s linear infinite; 
-}
+/* LE FLASH */
 #flash {
     position: fixed;
     top: 0;
@@ -65,17 +63,16 @@ body, html {
     height: 100%;
     background-color: white;
     opacity: 0;
-    z-index: 20000; /* Par-dessus tout, même le vortex */
-    pointer-events: none; /* Pour ne pas bloquer les clics */
+    z-index: 9999;
+    pointer-events: none;
 }
 
-/* Animation du flash */
 .flash-animation {
     animation: flash-effect 0.8s ease-out;
 }
 
 @keyframes flash-effect {
     0% { opacity: 0; }
-    20% { opacity: 1; } /* Le pic de lumière blanche */
+    25% { opacity: 1; }
     100% { opacity: 0; }
 }
