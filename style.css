@@ -23,29 +23,26 @@ body, html {
 
 .machine-style {
     position: absolute;
-    /* POSITION : Augmenter le % pour descendre l'image (80% est vers le bas) */
-    bottom: 10%; 
-    
-    /* VITESSE : On change 1s par 3s pour que ce soit 3 fois plus lent */
-    transition: right 3s ease-out, opacity 0.5s; 
-    
+    bottom: 5%; /* Encore un peu plus bas */
     right: -100%; 
-    width: 400px;
+    width: 450px;
+    
+    /* EFFET LOURD : On utilise steps(10) pour que le mouvement se fasse en 10 saccades */
+    /* On retire opacity de la transition pour qu'elle disparaisse d'un coup */
+    transition: right 4s steps(10); 
+    
     z-index: 10;
-    opacity: 1;
+    display: block; /* S'assure qu'elle est bien là */
 }
 
+/* Position d'arrivée */
 .machine-entree {
-    /* La machine s'arrête ici (30% du bord droit) */
-    right: 30%; 
-}
+    right: 25%; 
 }
 
-/* On crée une classe pour la faire disparaître */
-.machine-cachee {
-    opacity: 0; 
-    pointer-events: none; /* Pour qu'elle ne gêne pas si on clique */
-
+/* Classe pour la faire disparaître instantanément */
+.machine-disparue {
+    display: none !important;
 }
     
     /* On insère ton lien d'image ici */
