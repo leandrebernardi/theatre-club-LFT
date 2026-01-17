@@ -11,15 +11,14 @@ body, html {
 .scene {
     width: 100%;
     height: 100vh;
-    
-    /* On garde la transition pour que ce soit fluide */
     transition: background-image 0.8s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
-    /* REGLAGES CRITIQUES POUR EVITER LE BUG DE LA VIDEO : */
-    background-size: cover;      /* Force l'image à remplir tout l'écran */
-    background-position: center;  /* Centre l'image */
-    background-repeat: no-repeat; /* Interdit à l'image de se répéter en mosaïque */
-    background-attachment: fixed; /* Garde l'image bien en place */
+    /* On force l'image du café au démarrage ici */
+    background-image: url('https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=');
 }
     
     /* On insère ton lien d'image ici */
