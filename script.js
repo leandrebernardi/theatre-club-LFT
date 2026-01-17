@@ -10,25 +10,26 @@ const listeImages = [
 let etape = 0; 
 
 document.addEventListener('keydown', function(event) {
+    // On écoute la touche Espace
     if (event.key === " " || event.code === "Space") {
-        event.preventDefault(); // Empêche la page de descendre
+        event.preventDefault(); // Empêche la page de bouger
         etape++;
 
         if (etape === 1) {
-            // Fait entrer la machine
+            // ACTION 1 : Faire entrer la machine
             machine.classList.add('machine-entree');
-            console.log("Etape 1 : La machine entre");
+            console.log("Machine entre");
         } 
         else if (etape === 2) {
-            // Change le fond et supprime la machine
+            // ACTION 2 : Changer le fond ET faire disparaître la machine d'un coup
             decor.style.backgroundImage = "url('" + listeImages[1] + "')";
-            machine.style.display = "none";
-            console.log("Etape 2 : Image 2 et machine supprimée");
+            machine.style.display = "none"; 
+            console.log("Fond 2 et machine supprimée");
         } 
         else if (etape === 3) {
-            // Image 3
+            // ACTION 3 : Changer vers le fond 3
             decor.style.backgroundImage = "url('" + listeImages[2] + "')";
-            console.log("Etape 3 : Image 3");
+            console.log("Fond 3");
         }
     }
 });
