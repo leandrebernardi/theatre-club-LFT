@@ -16,48 +16,52 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault();
         etape++;
 
-        // --- ALLER VERS VILLE ZOMBIE ---
+        // ÉTAPE 1 : Machine arrive au café
         if (etape === 1) {
-            machine.style.display = "block"; // On s'assure qu'elle est visible
             machine.classList.add('machine-entree');
         } 
+        // ÉTAPE 2 : Vortex s'allume
         else if (etape === 2) {
             vortex.classList.add('vortex-visible');
         } 
+        // ÉTAPE 3 : FLASH -> Vers Ville Zombie
         else if (etape === 3) {
             flash.classList.add('flash-animation');
             setTimeout(() => {
-                decor.style.backgroundImage = "url('" + listeImages[1] + "')"; // Ville Zombie
+                decor.style.backgroundImage = "url('" + listeImages[1] + "')";
+                
+                // ON CACHE TOUT ET ON RESET LA POSITION
                 machine.style.display = "none";
+                machine.classList.remove('machine-entree'); // Elle retourne à droite (cachée)
+                
+                vortex.classList.remove('vortex-visible');
                 vortex.style.display = "none";
-                vortex.classList.remove('vortex-visible'); // Reset pour plus tard
             }, 300);
             setTimeout(() => flash.classList.remove('flash-animation'), 3000);
         }
-
-        // --- RETOUR VERS LE CAFÉ ---
+        // ÉTAPE 4 : La machine revient (mais elle est à droite, cachée)
         else if (etape === 4) {
-            // La machine réapparaît dans la ville zombie
-            machine.style.display = "block";
-            console.log("Machine de retour");
+            machine.style.display = "block"; 
+            // On déclenche l'entrée (elle va glisser depuis le côté)
+            setTimeout(() => machine.classList.add('machine-entree'), 50);
         }
+        // ÉTAPE 5 : Le vortex se rallume
         else if (etape === 5) {
-            // Le vortex se rallume
+            vortex.style.display = "block";
             vortex.classList.add('vortex-visible');
-            console.log("Vortex de retour");
         }
+        // ÉTAPE 6 : FLASH -> Retour Café
         else if (etape === 6) {
-            // FLASH FINAL ET RETOUR AU CAFÉ
             flash.classList.add('flash-animation');
             setTimeout(() => {
-                decor.style.backgroundImage = "url('" + listeImages[0] + "')"; // Retour au Café
+                decor.style.backgroundImage = "url('" + listeImages[0] + "')";
                 machine.style.display = "none";
                 vortex.style.display = "none";
             }, 300);
             setTimeout(() => flash.classList.remove('flash-animation'), 3000);
         }
+        // ÉTAPE 7 : Image finale (Le 3)
         else if (etape === 7) {
-            // Image bonus (le 3)
             decor.style.backgroundImage = "url('" + listeImages[2] + "')";
         }
     }
