@@ -2,11 +2,6 @@ const decor = document.getElementById('decor');
 const machine = document.getElementById('machine');
 const vortex = document.getElementById('vortex');
 const flash = document.getElementById('flash');
-
-// Sons
-const sonMachine = document.getElementById('son-machine');
-const sonVortex = document.getElementById('son-vortex');
-const sonFlash = document.getElementById('son-flash');
 const musiqueZombie = document.getElementById('musique-zombie');
 
 const listeImages = [
@@ -18,57 +13,63 @@ let etape = 0;
 
 function avancerHistoire() {
     etape++;
+    console.log("Étape actuelle : " + etape); // Pour vérifier dans la console
 
-    if (etape === 1) { // Machine arrive au Café
-        sonMachine.play();
+    if (etape === 1) {
+        // MACHINE ARRIVE
         machine.classList.add('machine-entree');
     } 
-    else if (etape === 2) { // Vortex s'allume
-        sonVortex.play();
+    else if (etape === 2) {
+        // VORTEX ALLUMÉ
+        vortex.style.display = "block";
         vortex.classList.add('vortex-visible');
     } 
-    else if (etape === 3) { // FLASH -> Ville Zombie + Musique
-        sonFlash.play();
+    else if (etape === 3) {
+        // FLASH + DÉCOR ZOMBIE
         musiqueZombie.play(); 
         flash.classList.add('flash-animation');
         setTimeout(() => {
             decor.style.backgroundImage = "url('" + listeImages[1] + "')";
-            machine.style.display = "none";
-            machine.classList.remove('machine-entree');
+            machine.classList.remove('machine-entree'); // Elle repart à droite
             vortex.classList.remove('vortex-visible');
+            vortex.style.display = "none";
         }, 300);
         setTimeout(() => flash.classList.remove('flash-animation'), 3000);
     }
-    else if (etape === 4) { // Machine revient chez les Zombies
-        sonMachine.play();
-        machine.style.display = "block";
-        setTimeout(() => machine.classList.add('machine-entree'), 50);
+    else if (etape === 4) {
+        // RETOUR MACHINE (ZOMBIE)
+        machine.classList.add('machine-entree');
     }
-    else if (etape === 5) { // Vortex s'allume
-        sonVortex.play();
+    else if (etape === 5) {
+        // RETOUR VORTEX (ZOMBIE)
+        vortex.style.display = "block";
         vortex.classList.add('vortex-visible');
     }
-    else if (etape === 6) { // FLASH -> Retour Café + Stop Musique
-        sonFlash.play();
+    else if (etape === 6) {
+        // FLASH + RETOUR CAFÉ
         flash.classList.add('flash-animation');
         setTimeout(() => {
             musiqueZombie.pause();
             musiqueZombie.currentTime = 0;
             decor.style.backgroundImage = "url('" + listeImages[0] + "')";
-            machine.style.display = "none";
+            machine.classList.remove('machine-entree');
             vortex.classList.remove('vortex-visible');
+            vortex.style.display = "none";
         }, 300);
         setTimeout(() => flash.classList.remove('flash-animation'), 3000);
+        etape = 0; // On remet à zéro pour pouvoir recommencer
     }
 }
 
-// Clavier
-document.addEventListener('keydown', (e) => {
-    if (e.key === " " || e.code === "Space") {
+// Support Clavier
+window.addEventListener('keydown', function(e) {
+    if (e.code === "Space") {
         e.preventDefault();
         avancerHistoire();
     }
 });
 
-// Tactile/Clic
-document.addEventListener('click', avancerHistoire);
+// Support Clic (sur tout l'écran)
+window.addEventListener('mousedown', function() {
+    avancerHistoire();
+});
