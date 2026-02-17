@@ -13,51 +13,54 @@ let etape = 0;
 
 function avancerHistoire() {
     etape++;
-    console.log("Étape actuelle : " + etape); // Pour vérifier dans la console
+    
+    // SÉCURITÉ AUDIO : On essaie de débloquer le son au premier clic
+    if (etape === 1) {
+        musiqueZombie.play().then(() => {
+            musiqueZombie.pause(); // On le lance et on le coupe direct juste pour "l'activer"
+            console.log("Audio activé et prêt !");
+        }).catch(error => console.log("L'audio attend un clic utilisateur"));
+    }
 
     if (etape === 1) {
-        // MACHINE ARRIVE
         machine.classList.add('machine-entree');
     } 
     else if (etape === 2) {
-        // VORTEX ALLUMÉ
         vortex.style.display = "block";
         vortex.classList.add('vortex-visible');
     } 
     else if (etape === 3) {
-        // FLASH + DÉCOR ZOMBIE
+        // ICI LE SON SE LANCE POUR DE VRAI
+        musiqueZombie.currentTime = 0;
         musiqueZombie.play(); 
+        
         flash.classList.add('flash-animation');
         setTimeout(() => {
             decor.style.backgroundImage = "url('" + listeImages[1] + "')";
-            machine.classList.remove('machine-entree'); // Elle repart à droite
+            machine.classList.remove('machine-entree');
             vortex.classList.remove('vortex-visible');
             vortex.style.display = "none";
         }, 300);
         setTimeout(() => flash.classList.remove('flash-animation'), 3000);
     }
     else if (etape === 4) {
-        // RETOUR MACHINE (ZOMBIE)
         machine.classList.add('machine-entree');
     }
     else if (etape === 5) {
-        // RETOUR VORTEX (ZOMBIE)
         vortex.style.display = "block";
         vortex.classList.add('vortex-visible');
     }
     else if (etape === 6) {
-        // FLASH + RETOUR CAFÉ
         flash.classList.add('flash-animation');
         setTimeout(() => {
-            musiqueZombie.pause();
-            musiqueZombie.currentTime = 0;
+            musiqueZombie.pause(); // STOP LA MUSIQUE
             decor.style.backgroundImage = "url('" + listeImages[0] + "')";
             machine.classList.remove('machine-entree');
             vortex.classList.remove('vortex-visible');
             vortex.style.display = "none";
         }, 300);
         setTimeout(() => flash.classList.remove('flash-animation'), 3000);
-        etape = 0; // On remet à zéro pour pouvoir recommencer
+        etape = 0; 
     }
 }
 
@@ -69,7 +72,7 @@ window.addEventListener('keydown', function(e) {
     }
 });
 
-// Support Clic (sur tout l'écran)
+// Support Clic
 window.addEventListener('mousedown', function() {
     avancerHistoire();
 });
