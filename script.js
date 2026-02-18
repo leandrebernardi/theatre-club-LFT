@@ -14,15 +14,9 @@ let etape = 0;
 function avancerHistoire() {
     etape++;
     
-    // SÉCURITÉ AUDIO : On essaie de débloquer le son au premier clic
+    // On force le chargement du son dès le premier clic
     if (etape === 1) {
-        musiqueZombie.play().then(() => {
-            musiqueZombie.pause(); // On le lance et on le coupe direct juste pour "l'activer"
-            console.log("Audio activé et prêt !");
-        }).catch(error => console.log("L'audio attend un clic utilisateur"));
-    }
-
-    if (etape === 1) {
+        musiqueZombie.load(); 
         machine.classList.add('machine-entree');
     } 
     else if (etape === 2) {
@@ -30,9 +24,16 @@ function avancerHistoire() {
         vortex.classList.add('vortex-visible');
     } 
     else if (etape === 3) {
-        // ICI LE SON SE LANCE POUR DE VRAI
-        musiqueZombie.currentTime = 0;
-        musiqueZombie.play(); 
+        // TENTATIVE DE LECTURE AVEC PROTECTION CONTRE LES ERREURS
+        let playPromise = musiqueZombie.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                console.log("Musique lancée !");
+            }).catch(error => {
+                console.log("Erreur de lecture : " + error);
+            });
+        }
         
         flash.classList.add('flash-animation');
         setTimeout(() => {
@@ -53,7 +54,8 @@ function avancerHistoire() {
     else if (etape === 6) {
         flash.classList.add('flash-animation');
         setTimeout(() => {
-            musiqueZombie.pause(); // STOP LA MUSIQUE
+            musiqueZombie.pause();
+            musiqueZombie.currentTime = 0;
             decor.style.backgroundImage = "url('" + listeImages[0] + "')";
             machine.classList.remove('machine-entree');
             vortex.classList.remove('vortex-visible');
@@ -64,15 +66,5 @@ function avancerHistoire() {
     }
 }
 
-// Support Clavier
-window.addEventListener('keydown', function(e) {
-    if (e.code === "Space") {
-        e.preventDefault();
-        avancerHistoire();
-    }
-});
-
-// Support Clic
-window.addEventListener('mousedown', function() {
-    avancerHistoire();
-});
+window.addEventListener('keydown', (e) => { if (e.code === "Space") { e.preventDefault(); avancerHistoire(); } });
+window.addEventListener('mousedown', avancerHistoire);
