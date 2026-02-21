@@ -2,21 +2,23 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Théâtre Interactif - Vortex</title>
+    <title>Théâtre Interactif</title>
     <link rel="stylesheet" href="style.css">
 </head>
-cccc
+<body>
 
     <div id="decor" class="scene"></div>
     
-    <img id="machine" src="unnamed-removebg-preview.png" class="machine-style">
-    <img id="vortex" src="vortex.png" class="vortex-style">
+    <img id="machine" src="unnamed-removebg-preview.png" class="machine-style" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616490.png'">
+    <img id="vortex" src="ton-image-vortex.png" class="vortex-style" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1154/1154944.png'">
+    
     <div id="flash"></div>
-        
+
     <audio id="musique-zombie" preload="auto" loop>
         <source src="https://upload.wikimedia.org/wikipedia/commons/4/41/2014-03-24_Horror_Tension_1.ogg" type="audio/ogg">
         <source src="https://www.soundjay.com/misc/sounds/horror-ambience-01.mp3" type="audio/mpeg">
-        <source src="musique.mp3" type="audio/mpeg">
     </audio>
+
+    <script src="script.js"></script>
 </body>
 </html>
