@@ -1,6 +1,5 @@
 const decor = document.getElementById('decor');
 const machine = document.getElementById('machine');
-const vortex = document.getElementById('vortex');
 const flash = document.getElementById('flash');
 const musique = document.getElementById('musique-zombie');
 
@@ -11,59 +10,50 @@ const images = [
 
 let etape = 0;
 
-function jouerSonne() {
-    musique.play().catch(e => console.log("Le son attend une interaction..."));
-}
-
 function avancer() {
     etape++;
     console.log("Étape " + etape);
 
     if (etape === 1) {
-        // La machine arrive
+        // 1. La machine arrive (lentement et saccadé)
         machine.classList.add('machine-entree');
-        musique.load(); // On prépare le son
+        musique.load(); // On prépare la musique en silence
     } 
     else if (etape === 2) {
-        // Le vortex apparaît
-        vortex.style.display = "block";
-        setTimeout(() => vortex.classList.add('vortex-visible'), 50);
-    } 
-    else if (etape === 3) {
-        // TÉLÉPORTATION + MUSIQUE
-        jouerSonne();
+        // 2. FLASH + MUSIQUE + DÉCOR ZOMBIE
+        musique.play().catch(e => console.log("L'audio nécessite un clic"));
         flash.classList.add('flash-animation');
+        
         setTimeout(() => {
             decor.style.backgroundImage = "url('" + images[1] + "')";
-            machine.classList.remove('machine-entree');
-            vortex.classList.remove('vortex-visible');
+            machine.classList.remove('machine-entree'); // La machine disparaît pendant le flash
         }, 500);
-        setTimeout(() => flash.classList.remove('flash-animation'), 3000);
+
+        setTimeout(() => {
+            flash.classList.remove('flash-animation');
+        }, 3000);
     }
-    else if (etape === 4) {
-        // Machine revient (Monde Zombie)
+    else if (etape === 3) {
+        // 3. La machine revient dans le monde zombie
         machine.classList.add('machine-entree');
     }
-    else if (etape === 5) {
-        // Vortex revient
-        vortex.classList.add('vortex-visible');
-    }
-    else if (etape === 6) {
-        // RETOUR CAFÉ + STOP MUSIQUE
+    else if (etape === 4) {
+        // 4. FLASH FINAL + RETOUR CAFÉ + STOP MUSIQUE
         flash.classList.add('flash-animation');
         setTimeout(() => {
             musique.pause();
+            musique.currentTime = 0;
             decor.style.backgroundImage = "url('" + images[0] + "')";
             machine.classList.remove('machine-entree');
-            vortex.classList.remove('vortex-visible');
         }, 500);
+        
         setTimeout(() => {
             flash.classList.remove('flash-animation');
-            etape = 0;
+            etape = 0; // On recommence le cycle
         }, 3000);
     }
 }
 
-// Contrôles
+// Contrôles : Clic ou Touche Espace
 window.onclick = avancer;
 window.onkeydown = (e) => { if(e.code === "Space") avancer(); };
