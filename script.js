@@ -1,4 +1,5 @@
-const decor = document.getElementById('decor');
+alert("Le script est bien chargé !");
+console.log("Démarrage du script...");const decor = document.getElementById('decor');
 const machine = document.getElementById('machine');
 const vortex = document.getElementById('vortex');
 const flash = document.getElementById('flash');
