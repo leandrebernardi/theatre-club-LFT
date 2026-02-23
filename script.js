@@ -1,8 +1,9 @@
 const decor = document.getElementById('decor');
 const machine = document.getElementById('machine');
-const vortex = document.getElementById('vortex'); // Ton docteur
+const vortex = document.getElementById('vortex'); 
 const flash = document.getElementById('flash');
 const musique = document.getElementById('musique-zombie');
+const sonPersonnage = document.getElementById('son-personnage');
 
 // Liste des décors dans l'ordre
 const images = [
@@ -42,23 +43,39 @@ function avancer() {
         decor.style.backgroundImage = "url('" + images[2] + "')"; // Affiche 1.svg
     }
     else if (etape === 5) {
-        decor.style.backgroundImage = "url('" + images[3] + "')"; // Affiche 2.svg
+        // Affiche 2.png (Le personnage va commencer à parler au prochain clic)
+        decor.style.backgroundImage = "url('" + images[3] + "')";
     }
     else if (etape === 6) {
-        decor.style.backgroundImage = "url('" + images[1] + "')"; // Retour image zombie standard
+        // ÉTAPE DIALOGUE : Le personnage parle, on reste sur 2.png
+        console.log("Le personnage parle...");
+        sonPersonnage.play().catch(e => console.log("Fichier parole.mp3 introuvable"));
+        
+        // Optionnel : on peut baisser un peu la musique de fond pour mieux entendre
+        musique.volume = 0.3; 
     }
-    // --- RETOUR AU CAFÉ ---
     else if (etape === 7) {
-        machine.classList.add('machine-entree');
+        // FIN DU DIALOGUE : On remonte le son de la musique et on prépare le retour
+        musique.volume = 1.0;
+        sonPersonnage.pause(); // Au cas où on clique avant la fin des 2 min
+        
+        decor.style.backgroundImage = "url('" + images[1] + "')"; // Retour ville zombie
+        console.log("Le dialogue est fini, retour ville zombie");
     }
     else if (etape === 8) {
-        vortex.classList.add('vortex-visible');
+        // La machine revient
+        machine.classList.add('machine-entree');
     }
     else if (etape === 9) {
+        // Le vortex/docteur revient
+        vortex.classList.add('vortex-visible');
+    }
+    else if (etape === 10) {
+        // FLASH FINAL + RETOUR CAFÉ
         flash.classList.add('flash-animation');
         setTimeout(() => {
             musique.pause();
-            decor.style.backgroundImage = "url('" + images[0] + "')"; // Retour Café
+            decor.style.backgroundImage = "url('" + images[0] + "')";
             machine.classList.remove('machine-entree');
             vortex.classList.remove('vortex-visible');
         }, 500);
@@ -67,7 +84,3 @@ function avancer() {
             etape = 0;
         }, 3000);
     }
-}
-
-window.onclick = avancer;
-window.onkeydown = (e) => { if(e.code === "Space") avancer(); };
