@@ -84,3 +84,4 @@ function avancer() {
             etape = 0;
         }, 3000);
     }
+}
