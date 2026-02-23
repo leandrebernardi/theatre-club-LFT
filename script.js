@@ -8,8 +8,8 @@ const musique = document.getElementById('musique-zombie');
 const images = [
     "https://media.istockphoto.com/id/1176123462/vector/modern-cafe-interior-empty-no-people-restaurant-cafeteria-design-flat-horizontal-vector.jpg?s=612x612&w=0&k=20&c=PwJmg9JELKEqtpN3k_GTJvD_6HuWckvN3GE2c4mlB-I=", // 0: Café
     "https://thumbs.dreamstime.com/b/explorez-un-dessin-anim%C3%A9-zombie-city-urban-ruins-fond-d-%C3%A9cran-pour-une-aventure-passionnante-plongez-dans-monde-et-dynamique-373526362.jpg", // 1: Ville Zombie
-    "1.svg", // 2: Nouvelle image 1
-    "2.svg"  // 3: Nouvelle image 2
+    "1.png", // 2: Nouvelle image 1
+    "2.png"  // 3: Nouvelle image 2
 ];
 
 let etape = 0;
