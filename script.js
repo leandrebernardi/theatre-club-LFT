@@ -1,4 +1,3 @@
-console.log(¨Starting¨)
 
 let etape = 0;
 
