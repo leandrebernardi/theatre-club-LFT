@@ -1,4 +1,4 @@
-alert("Script chargé !"); // On le garde pour confirmation
+console.log(¨Starting¨)
 
 let etape = 0;
 
