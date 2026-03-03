@@ -20,7 +20,8 @@ function avancer() {
     const flash = document.getElementById('flash');
     const musique = document.getElementById('musique-zombie');
     const sonPersonnage = document.getElementById('son-personnage');
-
+    const sonPersonnage2 = document.getElementById('son-personnage-2');
+    
     if (etape === 1 && machine) {
         machine.classList.add('machine-entree');
     } 
@@ -41,36 +42,46 @@ function avancer() {
     else if (etape === 4 && decor) {
         decor.style.backgroundImage = "url('" + images[2] + "')"; // 1.png
     }
-    else if (etape === 5 && decor) {
-        decor.style.backgroundImage = "url('" + images[3] + "')"; // 2.png
+    else if (etape === 5) {
+        // Affiche 2.png
+        decor.style.backgroundImage = "url('" + images[3] + "')";
     }
     else if (etape === 6) {
-        if (sonPersonnage) sonPersonnage.play();
-        if (musique) musique.volume = 0.2;
+        // PREMIER DIALOGUE
+        sonPersonnage.play().catch(e => console.log("Erreur son 1"));
+        musique.volume = 0.2; 
     }
     else if (etape === 7) {
-        if (musique) musique.volume = 1.0;
-        if (sonPersonnage) sonPersonnage.pause();
-        if (decor) decor.style.backgroundImage = "url('" + images[1] + "')";
+        // DEUXIÈME DIALOGUE (Nouveau clic Space)
+        sonPersonnage.pause(); // On coupe le 1er s'il n'est pas fini
+        sonPersonnage2.play().catch(e => console.log("Erreur son 2"));
     }
-    else if (etape === 8 && machine) {
+    else if (etape === 8) {
+        // FIN DES DIALOGUES : Retour décor zombie
+        musique.volume = 1.0;
+        sonPersonnage2.pause();
+        decor.style.backgroundImage = "url('" + images[1] + "')";
+    }
+    else if (etape === 9) {
+        // La machine revient
         machine.classList.add('machine-entree');
     }
-    else if (etape === 9 && vortex) {
+    else if (etape === 10) {
+        // Le vortex/docteur revient
         vortex.classList.add('vortex-visible');
     }
-    else if (etape === 10) {
-        if (flash) flash.classList.add('flash-animation');
+    else if (etape === 11) {
+        // FLASH FINAL + RETOUR CAFÉ
+        flash.classList.add('flash-animation');
         setTimeout(() => {
-            if (musique) musique.pause();
-            if (decor) decor.style.backgroundImage = "url('" + images[0] + "')";
-            if (machine) machine.classList.remove('machine-entree');
-            if (vortex) vortex.classList.remove('vortex-visible');
-            etape = 0;
+            musique.pause();
+            decor.style.backgroundImage = "url('" + images[0] + "')";
+            machine.classList.remove('machine-entree');
+            vortex.classList.remove('vortex-visible');
+            etape = 0; // Reset
         }, 500);
     }
 }
-
 // Double sécurité pour les contrôles
 window.onclick = avancer;
 window.onkeydown = (e) => { if(e.code === "Space") avancer(); };
